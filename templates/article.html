@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<!-- TÍTULO DO ARTIGO -->
+<h1 class="mb-4">{{ article.title }}</h1>
+<hr>
+
+<!-- Módulo 1 -->
+<p>{{ article.content1 | replace('\n', '<br>') | safe }}</p>
+
+<!-- Callout 1-->
+{% if article.callout1 %}
+<div class="alert alert-info" role="alert">
+    📢 {{ article.callout1 }}
+</div>
+{% endif %}
+
+<!-- Módulo 2 -->
+<p>{{ article.content2 | replace('\n', '<br>') | safe }}</p>
+
+<!-- Café Pixel -->
+<img src="{{ url_for('static', filename='img/pixelCoffee.png') }}" alt="Pixel Coffee" style="width: 100px; display: block; margin: 20px auto;">
+<!-- Curiosidade 1 -->
+{% if article.curiosity1 %}
+<div class="accordion mb-4" id="extraTips1">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne1">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne1">
+                💡 Curiosidade
+            </button>
+        </h2>
+        <div id="collapseOne1" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                {{ article.curiosity1 }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Módulo 3 -->
+<p>{{ article.content3 | replace('\n', '<br>') | safe }}</p>
+
+<!-- Callout 2 -->
+{% if article.callout2 %}
+<div class="alert alert-info" role="alert">
+    📢 {{ article.callout2 }}
+</div>
+{% endif %}
+
+<!-- Gato Espacial flutuando -->
+<div style="text-align: center; margin: 2rem 0;">
+    <img src="{{ url_for('static', filename='img/spacCat.png') }}" alt="Floating Space Cat" 
+         style="width: 200px; animation: floatycat 3s ease-in-out infinite;">
+    <p style="font-style: italic; margin-top: 1rem;">Que tal uma pausa?</p>
+</div>
+
+<!-- Curiosidade 2 -->
+{% if article.curiosity2 %}
+<div class="accordion mb-4" id="extraTips2">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne2">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne2">
+                💡 Curiosidade
+            </button>
+        </h2>
+        <div id="collapseOne2" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                {{ article.curiosity2 }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+<!-- Módulo 4 -->
+<p>{{ article.content4 | replace('\n', '<br>') | safe }}</p>
+
+<!-- Café Pixel -->
+<img src="{{ url_for('static', filename='img/pixelCoffee.png') }}" alt="Pixel Coffee" style="width: 100px; display: block; margin: 20px auto;">
+
+<!-- Callout 3 -->
+{% if article.callout3 %}
+<div class="alert alert-info" role="alert">
+    📢 {{ article.callout3 }}
+</div>
+{% endif %}
+
+<!-- VÍDEO NO YOUTUBE -->
+{% if article.youtube %}
+<div style="text-align: center;">
+    <hr>
+    <p>Deixamos um pequeno vídeo terceirizado abaixo.</p>
+    <h2>Aprenda mais!</h2>
+    <iframe width="560" height="315"
+        src="{{ article.youtube | youtube_embed }}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
+{% endif %}
+
+<style>
+@keyframes floatycat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+</style>
+
+<!-- Café Pixel -->
+<img src="{{ url_for('static', filename='img/pixelCoffee.png') }}" alt="Pixel Coffee" style="width: 100px; display: block; margin: 20px auto;">
+
+<!-- Curiosidade 3 -->
+{% if article.curiosity3 %}
+<div class="accordion mb-4" id="extraTips3">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne3">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne3">
+                💡 Curiosidade
+            </button>
+        </h2>
+        <div id="collapseOne3" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                {{ article.curiosity3 }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Módulo 5 -->
+<p>{{ article.content5 | replace('\n', '<br>') | safe }}</p>
+
+<!-- JavaScript para fazer o botão funcionar -->
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+</script>
+
+<!-- DESFECHO -->
+<hr>
+<br>
+<div style="text-align: center;">
+    <p style="margin-top: 1rem;">{{ article.stars * "⭐" }} PARABÉNS {{ article.stars * "⭐" }}</p>
+    <p style="font-style: italic; margin-top: 1rem;">Você completou o mini curso de <b>{{ article.title }}</b>! Logo abaixo você terá a chance de provar o que aprendeu, e depois disso...
+        bem, um universo inteiro de programação e tecnologia te espera lá fora. Este foi só o seu primeiro passo! Siga estudando firme e nos vemos no topo! 🏆🌌
+    </p>
+    <img src="{{ url_for('static', filename=article.sovereignCat) }}" 
+        alt="{{ article.sovereignCat }}"
+        title="{{ article.sovereignCatCaption }}"
+        style="width: 120px; display: block; margin: 20px auto;">
+</div>
+
+<!-- JAVASCRIPT PARA A BARRA DE PROGRESSO -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            var progress = document.getElementById("scrollProgress");
+            if(progress) {
+                progress.style.width = scrolled + "%";
+            }
+        };
+    });
+</script>
+<div class="progress" style="position: fixed; top: 0; left: 0; width: 100%; height: 5px; z-index: 9999;">
+    <div class="progress-bar" role="progressbar" style="width: 0%;" id="scrollProgress"></div>
+</div>
+    
+<!-- SESSÃO DE EXERCÍCIOS -->
+{% if article.questions %}
+<div class="practice-section mt-5 p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0">🧠 Teste seu conhecimento</h3>
+        {% if score is defined %}
+        <div class="badge bg-primary rounded-pill">Pontuação: {{ score }}/{{ total }}</div>
+        {% endif %}
+    </div>
+    <form method="POST" class="position-relative">
+        <div class="quiz-questions-container">
+            {% for question in article.questions %}
+            <div class="card mb-3 quiz-question-card">
+                <div class="card-body">
+                    <h5 class="card-title text-muted mb-3">Questão {{ loop.index }}</h5>
+                    <p class="fw-semibold mb-3">{{ question.question_text }}</p>
+                    
+                    <div class="quiz-options-container">
+                        {% for option in question.options %}
+                        <div class="quiz-option-item form-check mb-2">
+                            <input class="form-check-input" 
+                                   type="radio" 
+                                   name="question_{{ question.id }}" 
+                                   id="quiz_q{{ question.id }}_o{{ loop.index0 }}" 
+                                   value="{{ loop.index0 }}"
+                                   {% if user_answers and user_answers.get(question.id|string) == loop.index0|string %}checked{% endif %}>
+                            <label class="form-check-label" 
+                                   for="quiz_q{{ question.id }}_o{{ loop.index0 }}">
+                                {{ option }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="quiz-sticky-submit">
+            <button type="submit" class="btn btn-primary btn-lg w-100 shadow">
+                ✅ Verificar respostas
+            </button>
+        </div>
+    </form>
+
+    {% if score is defined %}
+    <div id="results" class="results mt-4 p-3 {% if score == total %}bg-success{% else %}bg-danger{% endif %} text-white rounded-3">
+        <div class="d-flex align-items-center gap-2">
+            {% if score == total %}
+            <span class="fs-4">🎉</span>
+            <div>
+                <h5 class="mb-1">Parabéns!</h5>
+                <p class="mb-0">Você acertou todas as questões!</p>
+            </div>
+            {% else %}
+            <span class="fs-4">💪</span>
+            <div>
+                <h5 class="mb-1">Continue praticando!</h5>
+                <p class="mb-0">Você acertou {{ score }} de {{ total }} questões</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    window.addEventListener('load', function() {
+        const results = document.getElementById('results');
+        if (results) {
+            results.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+</script>
+{% endif %}
+
+
+    <!-- BOTÃO PARA VOLTAR PARA A PÁGINA INICIAL -->
+    <div class="mt-4">
+        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">
+            ← Voltar para a página inicial
+        </a>
+    </div>
+{% endblock %}

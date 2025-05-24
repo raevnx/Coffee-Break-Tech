@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="header-image-container mb-5">
+        <div class="container">
+            
+            <div class="header-content text-center text-white">
+                <h2 class="display-5 mb-3">Aprenda Tecnologia com Calma</h2>
+                <p class="lead d-none d-md-block"><i>Saia do zero em tecnologia e programação no tempo que leva para tomar uma xícara de café ☕!</i></p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        
+        
+        
+        
+    
+    {% if search_query %}
+        <div class="search-results mb-5">
+            <h4 class="mb-4">Resultados para "{{ search_query }}"</h4>
+        
+            {% if results %}
+                {% for result in results %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ url_for('view_article', article_id=result.article.id) }}" 
+                                    class="text-decoration-none">
+                                    {{ result.article.title }}
+                                </a>
+                            </h5>
+                            {% for excerpt in result.excerpts %}
+                                <div class="excerpt mb-2 text-muted">
+                                    {{ excerpt|safe }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-results-container text-center">
+                    <img src="{{ url_for('static', filename='img/sleepyCat.png') }}" 
+                        class="no-results-image mb-4"
+                        alt="Gato dormindo - nenhum resultado encontrado">
+                    <div class="alert alert-warning">
+                        Nenhum artigo encontrado com os termos "{{ search_query }}"
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+
+
+        <hr>
+            <div class="text-center mb-5">
+                <h1 class="display-4 mb-3">Bem-vindo ao <i>Coffee Break Tech!</i></h1>
+                <p class="lead text-muted mx-auto" style="max-width: 1000px;">
+                    O mundo digital é enorme e abrangente, com inúmeras áreas para se conhecer. Aqui no Coffee Break Tech nós trazemos
+                    um pouco desse universo tão interessante e divertido, com artigos, vídeos e exercícios para iniciantes que aspiram 
+                    em dar seus primeiros passos no mundo da tecnologia e da programação.
+                </p>
+                <!-- Café Pixel -->
+                <img src="{{ url_for('static', filename='img/pixelCoffee.png') }}" alt="Pixel Coffee" style="width: 100px; display: block; margin: 20px auto;">
+                <p class="lead text-muted mx-auto" style="max-width: 1000px;">Nossa plataforma oferece três pequenos cursos separados em 
+                    módulos, voltados para um aprendizado simples e direcionado. Cada um dos cursos é separado em categorias de dificuldade 
+                    <img src="static/img/cup.png" alt="Ícone de xícara" style="width: 40px; height: 40px; vertical-align: middle;">,
+                    indo de Básico até Avançado, mas não se preocupe! Todos os três foram projetados para servirem como entrada no mundo 
+                    digital para qualquer um, apesar de uns serem mais complexos que outros. 
+                </p>
+                <p class="lead text-muted mx-auto" style="max-width: 1000px;">Escolha um dos cursos abaixo e comece a aprender!</p>
+                <p class="lead text-muted mx-auto" style="max-width: 1000px;">↓↓↓</p>
+                <br>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                {% for article in articles %}
+                    <div class="col" style="max-width: 320px;">
+                        <!-- Dificuldade do artigo -->
+                        <div class="difficulty-badge text-center mb-3">
+                            <div class="cups-container mb-1">
+                                {% set cup_count = {'básico': 1,'intermediário': 2,'avançado': 3}[article.difficulty] %}
+                                {% for i in range(cup_count) %}
+                                <img src="{{ url_for('static', filename='img/cup-' + article.difficulty + '.png') }}" class="cup-icon" alt="Cup {{ i }}">
+                                {% endfor %}
+                            </div>
+                            <span class="badge bg-light text-dark difficulty-label">
+                                {{ article.difficulty|title }}
+                            </span>
+                         </div>
+                         <br>
+                        <div class="card h-100 article-card">
+                            <div class="article-slider">
+                                <img src="{{ url_for('static', filename='img/' + article.title|lower|replace(' ', '_') + '.jpg') }}" 
+                                     class="slider-img" alt="Imagem de {{ article.title }}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <a href="{{ url_for('view_article', article_id=article.id) }}" 
+                                   class="btn btn-primary mt-2">Ler mais</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="container text-center mt-5">
+        <br>
+        <blockquote class="blockquote">
+            <p class="mb-0">"Qualquer tolo pode escrever código que um computador possa entender. Bons programadores escrevem códigos que os humanos podem entender."</p>
+            <br>
+            <footer class="blockquote-footer">Martin Fowler</footer>
+        </blockquote>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g fill="none" stroke="#5B4636" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Coffee Mug -->
+    <rect x="10" y="20" width="32" height="24" rx="4" ry="4" fill="#c2a58b"/>
+    <path d="M42 24c6 0 6 12 0 12" stroke="#5B4636" stroke-width="3" fill="none"/>
+    <rect x="10" y="44" width="32" height="6" rx="3" ry="3" fill="#5B4636"/>
+
+    <!-- Steam shaped like code symbols -->
+    <path d="M20 10c-2 4 2 6 0 10" />
+    <path d="M28 10c-2 4 2 6 0 10" />
+    <path d="M36 10c-2 4 2 6 0 10" />
+    <text x="14" y="8" font-size="8" fill="#5B4636">{</text>
+    <text x="24" y="8" font-size="8" fill="#5B4636">&lt;</text>
+    <text x="34" y="8" font-size="8" fill="#5B4636">/</text>
+    <text x="40" y="8" font-size="8" fill="#5B4636">&gt;</text>
+  </g>
+</svg>
